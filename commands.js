@@ -93,7 +93,7 @@ let commands = {
 	},
 	
 	dab: function (target, room, user) {
-		if (room !== user && room.id !== 'scrabble' && !user.canUseBasicCommands(room)) return;
+		if (room.id !== 'scrabble' && !user.canUseBasicCommands(room)) return;
 		room.say("/me dabs");
 	},
 	
@@ -103,39 +103,39 @@ let commands = {
 	},
 
 	scrabmonstour: function (target, room, user) {
-		if (room.id !== 'scrabble') return;
-        if (room === user || !user.canUseBasicCommands(room)) return;
-        room.say('/tour create gen 7 ' + target + ' , elimination');
-        room.say('/tour name Scrabblemons ' + target);
-	},
-   
-    tourofficial: function (target, room, user) {
-		if (room.id !== 'scrabble') return;
-        if (room === user || !user.canUseBasicCommands(room)) return;
+		if (room.id !== 'scrabble' || !user.canUseBasicCommands(room)) return;
 		room.say('/tour create gen 7 ' + target + ' , elimination');
-        room.say('/tour name Scrabblemons ' + target + ' Official');
-		room.say("/wall Hosting a scrabgame of Official Scrabblemons Tour! Click the join button to participate! Check http://scrabble-ps.weebly.com/scrabble-mons-guide.html if you don't know how to play!");
-    },
-   
-    tourstart: function (target, room, user) {
-		if (room.id !== 'scrabble') return;
-		if (room === user || !user.canUseBasicCommands(room)) return;
-		room.say('/tour start');
-		room.say('/wall Good luck to everyone!');
-	},
-	
-	tourend: function (target, room, user) {
-		if (room.id !== 'scrabble') return;
-		if (room === user || !user.canUseBasicCommands(room)) return;
-		room.say('/tour end');
+		room.say('/tour name Scrabblemons ' + target);
 	},
    
-    scrabtour: function (target, room, user) {
-		if (room.id !== 'scrabble') return;
-        if (room === user || !user.canUseBasicCommands(room)) return;
-        room.say('/wall Hosting a scrabgame of Official Scrabble Tour! It will be ran through challonge and the host will post a link after signups are closed! Do /me in to join!')
-    },
-	
+	tour: function (target, room, user) {
+		if (room.id !== 'scrabble' || !user.canUseBasicCommands(room)) return;
+		target = target.split(',');
+		switch (Tools.toId(target[0])) {
+			case 'official':
+				if (!target[1]) return room.say('You need specify a tier!');
+				room.say('/tour create gen 7 ' + target[1] + ' , elimination');
+        			room.say('/tour name Scrabblemons ' + target[1] + ' Official');
+				room.say("/wall Hosting a scrabgame of Official Scrabblemons Tour! Click the join button to participate! Check http://scrabble-ps.weebly.com/scrabble-mons-guide.html if you don't know how to play!");
+			break;
+			case 'start':
+				room.say('/tour start');
+				room.say('/wall Good luck to everyone!');
+			break;
+			case 'end':
+				room.say('/tour end');
+			break;
+			default:
+				room.say('Usage: .tour official/start/end, [tier]');
+			break;
+		}
+    	},
+
+ 	scrabtour: function (target, room, user) {
+		if (room.id !== 'scrabble' || !user.canUseBasicCommands(room)) return;
+        	room.say('/wall Hosting a scrabgame of Official Scrabble Tour! It will be ran through challonge and the host will post a link after signups are closed! Do /me in to join!')
+	},
+
 	scrabword: 'scrabwords',
 	scrabwords: function (target, room, user) {
 		if (room !== user && !user.canUseBasicCommands(room)) return;
@@ -253,14 +253,12 @@ let commands = {
 	
 	pants: 'aphantom',
 	aphantom: function (target, room, user) {
-		if (!user.canUseBasicCommands(room)) return;
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'scrabble' || !user.canUseBasicCommands(room)) return;
 		room.say("/me puts on pants");
 	},
 	
 	spook: function (target, room, user) {
-		if (!user.canUseBasicCommands(room)) return;
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'scrabble' || !user.canUseBasicCommands(room)) return;
 		room.say("!dt Heatmor");
 	},
 	
@@ -268,47 +266,35 @@ let commands = {
 		if (!user.canUseBasicCommands(room)) return;
 		room.say("/me snaps");
 	},
-	
 	dsg: function (target, room, user) {
 		if (!user.canUseBasicCommands(room)) return;
 		room.say("!dt Giratina-Origin");
 	},
-	
+	zyg: 'strat',
 	strat: function (target, room, user) {
-		if (!user.canUseBasicCommands(room)) return;
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'scrabble' || !user.canUseBasicCommands(room)) return;
 		room.say("!dt Zygarde-10%");
 	},
-	
 	sty: function (target, room, user) {
-		if (!user.canUseBasicCommands(room)) return;
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'scrabble' || !user.canUseBasicCommands(room)) return;
 		room.say("!dt Mawile");
 	},
-	
 	jen: function (target, room, user) {
-		if (!user.canUseBasicCommands(room)) return;
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'scrabble' || !user.canUseBasicCommands(room)) return;
 		room.say("!dt Glameow");
 	},
-
 	moo: function (target, room, user) {
-		if (!user.canUseBasicCommands(room)) return;
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'scrabble' || !user.canUseBasicCommands(room)) return;
 		room.say("!dt Miltank");
 	},
-	
 	swag: function (target, room, user) {
 		if (!user.canUseBasicCommands(room)) return;
 		room.say("!dt Black Glasses");
 	},
-	
 	crit: function (target, room, user) {
-		if (!user.canUseBasicCommands(room)) return;
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'scrabble' || !user.canUseBasicCommands(room)) return;
 		room.say("life could be a meme♪");
 	},
-	
 	pun: function (target, room, user) {
 		if (room !== user && !user.canUseBasicCommands(room)) return;
 		let ew = ["What do you call the security outside of a Samsung Store? Guardians of the Galaxy.", "Did you hear about the guy who got hit in the head with a can of soda? He was lucky it was a soft drink.", "Don't spell part backwards. It's a trap.", "I can't believe I got fired from the calendar factory. All I did was take a day off.", "I have a few jokes about unemployed people but it doesn't matter none of them work.", "I'm reading a book about anti-gravity. It's impossible to put down.", "I wasn't originally going to get a brain transplant, but then I changed my mind.", "Why was Cinderella thrown off the basketball team? She ran away from the ball.", "How did I escape Iraq? Iran.", "I'd tell you a chemistry joke but I know I wouldn't get a reaction.", "eBay is so useless. I tried to look up lighters and all they had was 13,749 matches.", "A friend of mine tried to annoy me with bird puns, but I soon realized that toucan play at that game.", "A courtroom artist was arrested today for an unknown reason... details are sketchy.", "I'm glad I know sign language, it's pretty handy.", "What do you have to do to have a party in space? You have to Planet.", "I was addicted to the hokey pokey... but thankfully, I turned myself around.", "Thieves had broken into my house and stolen everything except my soap, shower gel, towels and deodorant. Dirty Bastards.", "I am on a seafood diet. Every time I see food, I eat it.", "I'm emotionally constipated. I haven't given a shit in days.", "I wear two pairs of pants when I go golfing. People always ask me why I do. I say, I wear two pants when's I golf just in case I get a hole-in-one.", "I wear two pairs of pants when I go golfing. People always ask me why I do. I say, 'I wear two pants when's I golf just in case I get a hole-in-one.'", "Why did the scientist install a knocker on his door? He wanted to win the No-bell prize!", "What do you call an academically successful slice of bread? An honor roll.", "What do you call a cow with no legs? Ground beef.", "My first job was working in an orange juice factory, but I got canned because I couldn't concentrate.", "Claustrophobic people are more productive thinking out of the box.", "A book just fell on my head. I've only got myshelf to blame.", "My mate broke his left arm and left leg, but he was alright.", "What was Forrest Gump's email password? '1forrest1'", "I wanna make a joke about sodium, but Na..", "I hate insects puns, they really bug me.", "I used to be a banker, but then I lost interest.", "What do you call Watson when Sherlock isn't around? Holmeless.", "Did you hear about the Italian chef with a terminal illness? He pastaway.", "I relish the fact that you have mustard the strength to ketchup to me.", "What do prisoners use to call each other? Cell phones.", "If my puns are cheesy, then they would go well with crackers.", "I am so poor I cannot even pay attention.", "I found a rock yesterday which measured 1760 yards in length. Must be some kind of milestone.", "My math teacher called me average. How mean!", "What did one ocean say to the other ocean? Nothing, they just waved.", "I saw an ad for burial plots, and thought to myself this is the last thing I need.", "I've just written a song about tortillas - actually, it's more of a rap.", "Why is Peter Pan always flying? He neverlands.", "Why didn't the skeleton go to prom? Cause he had no body to dance with.", "What do you call people who are afraid of Santa Claus? Claustrophobic", "Atheism is a non-prophet organization.", "Why don't cannibals eat clowns? They taste funny.", "Why did the bee get married? Because he found his honey.", "Why couldn't the bike stand up on it's own? It was two tired.", "A bus station is where a bus stops. A train station is where a train stops. On my desk, I have a work station..", "Get stoned. Drink wet cement.", "If there was someone selling drugs in this place, weed know.", "Which day do chickens hate the most? Friday.", "Last time I got caught stealing a calendar I got 12 months.", "Did you hear about these new reversible jackets? I am excited to see how they turn out.", "A hole was found in the wall of a nudist camp. The police are looking into it.", "My computer has got Miley Virus. It has stopped twerking.", "What do you call a dictionary on drugs? HIGH-Definition.", "What do sea monsters eat for lunch? Fish and ships.", "The future, the present and the past walked into a bar. Things got a little tense.", "I put the 'fun' in dysfunctional.", "Do you know why I make puns? Because it's my respunsibility.", "Fishermen are reel men.", "If anything is possible, is it possible for something to be impossible?", "For Sale: Parachute. Only used once, never opened.", "Did you hear about the guy who choked on a pretzel? He was very salty.", "What did the tree say to autumn? Leaf me alone.", "A Roman fighter consumed his wife. He said he was glad 'e ate 'er", "What do you call a owl that does magic tricks? Hoodini.", "It's hard to explain puns to kleptomaniacs because they always take things literally.", "A garage sale is actually a Garbage sale but the 'b' is silent.", "What is the difference between a poorly dressed man on a bicycle and a nicely dressed man on a tricycle? A tire.", "Your gene pool could use a little chlorine.", "What do ghosts serve for dessert? I Scream.", "What tea do hockey players drink? Penaltea!", "I wanted to make a joke about criminals, but I was scared it would get stolen.", "Why does the bike not stand by itself? Because it is two tired.", "Do skunks celebrate Valentines Day? Sure, they're very scent-imental!", "On the other hand, you have different fingers.", "No matter how much you push the envelope, it'll still be stationery.", "This morning some clown opened the door for me. I thought to myself that's a nice Jester.", "Why did the chicken cross the road? Because KFC was on the other side.", "STRESSED is just DESSERTS spelled backward.", "What if there were no hypothetical questions?", "Television is a medium because anything well done is rare.", "What do you get when you cross a joke with a rhetorical question?", "You know those people using bibles on their phones? They are using phony bibles.", "Where do you find a birthday present for a cat? In a cat-alogue!", "In democracy, it is your vote that counts. In feudalism, it is your count that votes.", "A donkey fell into a bowl of sugar. Now that's a sweet ass.", "What's the difference between a guitar and a fish? You can't tuna fish!", "I asked my friend for a sharpened pencil, but he didn't have one. I always knew he was a little dull", "How do you get Pikachu onto the bus? You Pokemon.", "What nationality is Santa Claus? North Polish" , "I would tell a swimming joke, but I think it's too watered-down to be funny.", "Lately I've been trying to touch my toes, which I don't find so complicated, but my knees just can't get it straight.", "What did Zelda tell Link when he couldn't open the door? TRIFORCE!", ];
@@ -317,7 +303,7 @@ let commands = {
 	
 	randtier: function (target, room, user) {
 		if (room !== user && !user.canUseBasicCommands(room)) return;
-		let waaw = ["Ubers", "OU", "UU", "RU", "NU", "AG", "MnM", "CAP"]
+		let waaw = ["Ubers", "OU", "UU", "RU", "NU", "AG", "MnM", "CAP"];
 		room.say(Tools.sample(waaw));
 	},
 
