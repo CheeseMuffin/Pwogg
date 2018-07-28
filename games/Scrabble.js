@@ -555,6 +555,9 @@ class Scrabble extends Games.Game {
 		let hand = this.hands.get(player).slice();
 		target = Tools.toId(target).toUpperCase();
 		let copytiles = this.tiles.slice();
+		if (copytiles.length == 0) {
+			return user.say("There are no tiles left to pass.");
+		}
 		for (let i = 0; i < target.length; i++) {
 			let index = hand.indexOf(target[i]);
 			if (index === -1) return player.say("You don't have **" + target[i] + "** to switch out!");
