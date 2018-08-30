@@ -193,7 +193,7 @@ let commands = {
 	scrabblegame: function (target, room, user) {
 		if (!user.hasRank(Rooms.get('scrabble'), '+')) return;
 		let i = 1;
-		while (Rooms.get("groupchat-scrabblee-scrabble" + i)) {
+		while (Rooms.get("groupchat-scrabble-scrabble" + i)) {
 			i += 1;
 		}
 		global.awaitingscrab = true;
