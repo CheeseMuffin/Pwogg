@@ -35,7 +35,7 @@ let commands = {
 
     testroom: function (target, room, user) {
         if (!user.isDeveloper()) return;
-        Rooms.get("scrabble").say("/makegroupchat test");
+        Rooms.get("boardgames").say("/makegroupchat test");
         user.say("Join <<groupchat-scrabblee-test>>!");
     },
 
@@ -93,7 +93,7 @@ let commands = {
 	},
 	
 	dab: function (target, room, user) {
-		if (room !== user && room.id !== 'scrabble' && !user.canUseBasicCommands(room)) return;
+		if (room !== user && room.id !== 'boardgames' && !user.canUseBasicCommands(room)) return;
 		room.say("/me dabs");
 	},
 	
@@ -103,14 +103,14 @@ let commands = {
 	},
 
 	scrabmonstour: function (target, room, user) {
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'boardgames') return;
         if (room === user || !user.canUseBasicCommands(room)) return;
         room.say('/tour create gen 7 ' + target + ' , elimination');
         room.say('/tour name Scrabblemons ' + target);
 	},
    
     tourofficial: function (target, room, user) {
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'boardgames') return;
         if (room === user || !user.canUseBasicCommands(room)) return;
 		room.say('/tour create gen 7 ' + target + ' , elimination');
         room.say('/tour name Scrabblemons ' + target + ' Official');
@@ -118,20 +118,20 @@ let commands = {
     },
    
     tourstart: function (target, room, user) {
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'boardgames') return;
 		if (room === user || !user.canUseBasicCommands(room)) return;
 		room.say('/tour start');
 		room.say('/wall Good luck to everyone!');
 	},
 	
 	tourend: function (target, room, user) {
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'boardgames') return;
 		if (room === user || !user.canUseBasicCommands(room)) return;
 		room.say('/tour end');
 	},
    
     scrabtour: function (target, room, user) {
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'boardgames') return;
         if (room === user || !user.canUseBasicCommands(room)) return;
         room.say('/wall Hosting a scrabgame of Official Scrabble Tour! It will be ran through challonge and the host will post a link after signups are closed! Do /me in to join!')
     },
@@ -191,19 +191,19 @@ let commands = {
 	},
 
 	scrabblegame: function (target, room, user) {
-		if (!user.hasRank(Rooms.get('scrabble'), '+')) return;
+		if (!user.hasRank(Rooms.get('boardgames'), '+')) return;
 		let i = 1;
-		while (Rooms.get("groupchat-scrabble-scrabble" + i)) {
+		while (Rooms.get("groupchat-boardgames-scrabble" + i)) {
 			i += 1;
 		}
 		global.awaitingscrab = true;
 		global.scrabroom = room;
 		global.notimer = !!(["notimer", "nt"].indexOf(Tools.toId(target)) !== -1);
-		Rooms.get('scrabble').say("/subroomgroupchat scrabble" + i);
+		Rooms.get('boardgames').say("/subroomgroupchat scrabble" + i);
 	},
 
 	games: function (target, room, user) {
-		if (!user.hasRank(Rooms.get('scrabble'), '%')) return;
+		if (!user.hasRank(Rooms.get('boardgames'), '%')) return;
 		let scrabrooms = [];
 		for (let roomid in Rooms.rooms) {
 			let room = Rooms.get(roomid);
@@ -254,13 +254,13 @@ let commands = {
 	pants: 'aphantom',
 	aphantom: function (target, room, user) {
 		if (!user.canUseBasicCommands(room)) return;
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'boardgames') return;
 		room.say("/me puts on pants");
 	},
 	
 	spook: function (target, room, user) {
 		if (!user.canUseBasicCommands(room)) return;
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'boardgames') return;
 		room.say("!dt Heatmor");
 	},
 	
@@ -276,25 +276,25 @@ let commands = {
 	
 	strat: function (target, room, user) {
 		if (!user.canUseBasicCommands(room)) return;
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'boardgames') return;
 		room.say("!dt Zygarde-10%");
 	},
 	
 	sty: function (target, room, user) {
 		if (!user.canUseBasicCommands(room)) return;
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'boardgames') return;
 		room.say("!dt Mawile");
 	},
 	
 	jen: function (target, room, user) {
 		if (!user.canUseBasicCommands(room)) return;
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'boardgames') return;
 		room.say("!dt Glameow");
 	},
 
 	moo: function (target, room, user) {
 		if (!user.canUseBasicCommands(room)) return;
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'boardgames') return;
 		room.say("!dt Miltank");
 	},
 	
@@ -305,7 +305,7 @@ let commands = {
 	
 	crit: function (target, room, user) {
 		if (!user.canUseBasicCommands(room)) return;
-		if (room.id !== 'scrabble') return;
+		if (room.id !== 'boardgames') return;
 		room.say("life could be a meme♪");
 	},
 	
@@ -325,7 +325,7 @@ let commands = {
 	firsts: 'first',
 	first: function (target, room, user) {
 		if (!target) return;
-		if (!user.hasRank(Rooms.get('scrabble'), '+')) return;
+		if (!user.hasRank(Rooms.get('boardgames'), '+')) return;
 		let split = target.split(",");
 		if (split.length < 2) {
 			return room.say("You must specify the leaderboard you are adding to");
@@ -342,7 +342,7 @@ let commands = {
 	seconds: 'second',
 	second: function (target, room, user) {
 		if (!target) return;
-		if (!user.hasRank(Rooms.get('scrabble'), '+')) return;
+		if (!user.hasRank(Rooms.get('boardgames'), '+')) return;
 		let split = target.split(",");
 		if (split.length < 2) {
 			return room.say("You must specify the leaderboard you are adding to");
@@ -360,7 +360,7 @@ let commands = {
 	parts: 'participation',
 	participation: function (target, room, user) {
 		if (!target) return;
-		if (!user.hasRank(Rooms.get('scrabble'), '+')) return;
+		if (!user.hasRank(Rooms.get('boardgames'), '+')) return;
 		let split = target.split(",");
 		if (split.length < 2) {
 			return room.say("You must specify the leaderboard you are adding to");
@@ -383,7 +383,7 @@ let commands = {
 	rmfirst: 'removefirst',
 	removefirst: function (target, room, user) {
 		if (!target) return;
-		if (!user.hasRank(Rooms.get('scrabble'), '+')) return;
+		if (!user.hasRank(Rooms.get('boardgames'), '+')) return;
 		let split = target.split(",");
 		if (split.length < 2) {
 			return room.say("You must specify the leaderboard you are removing from");
@@ -403,7 +403,7 @@ let commands = {
 	rmsecond: 'removesecond',
 	removesecond: function (target, room, user) {
 		if (!target) return;
-		if (!user.hasRank(Rooms.get('scrabble'), '+')) return;
+		if (!user.hasRank(Rooms.get('boardgames'), '+')) return;
 		let split = target.split(",");
 		if (split.length < 2) {
 			return room.say("You must specify the leaderboard you are removing from");
@@ -423,7 +423,7 @@ let commands = {
 	rmthird: 'removethird',
 	removethird: function (target, room, user) {
 		if (!target) return;
-		if (!user.hasRank(Rooms.get('scrabble'), '+')) return;
+		if (!user.hasRank(Rooms.get('boardgames'), '+')) return;
 		let split = target.split(",");
 		if (split.length < 2) {
 			return room.say("You must specify the leaderboard you are removing from");
@@ -446,7 +446,7 @@ let commands = {
 	rmtop: 'removetop',
 	removetop: function (target, room, user) {
 		if (!target) return;
-		if (!user.hasRank(Rooms.get('scrabble'), '+')) return;
+		if (!user.hasRank(Rooms.get('boardgames'), '+')) return;
 		let split = target.split(",");
 		if (split.length < 2) {
 			return room.say("You must specify the leaderboard you are removing from");
@@ -472,7 +472,7 @@ let commands = {
 	rmparts: 'removepart',
 	removepart: function (target, room, user) {
 		if (!target) return;
-		if (!user.hasRank(Rooms.get('scrabble'), '+')) return;
+		if (!user.hasRank(Rooms.get('boardgames'), '+')) return;
 		let split = target.split(",");
 		if (split.length < 2) {
 			return room.say("You must specify the leaderboard you are removing from");
@@ -536,10 +536,10 @@ let commands = {
 			}
 			str += strs.join("");
 			str += "</table></body></html></div>";	
-			Rooms.get('scrabble').say('/pminfobox ' + user.id + ", " + str);
+			Rooms.get('boardgames').say('/pminfobox ' + user.id + ", " + str);
 		} else {
 			let str = lb.getStr(num);
-			if (room.id === 'scrabble') {
+			if (room.id === 'boardgames') {
 				room.say("/addhtmlbox " + str);
 			} else {
 				room.say("!htmlbox " + str);

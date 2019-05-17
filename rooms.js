@@ -59,7 +59,7 @@ class Room {
 			}
 		}
 
-		if (this.id === 'scrabble' && user.id in this.intros) {
+		if (this.id === 'boardgames' && user.id in this.intros) {
 			let info = this.intros[user.id];
 			if (info.waiting) return;
 			this.say(info.msg);

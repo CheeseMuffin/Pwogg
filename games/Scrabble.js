@@ -224,7 +224,7 @@ class Scrabble extends Games.Game {
 	 */
     sayHand(player) {
 		let user = Users.get(player.id);
-		if (!user.rooms.has(Rooms.get('scrabble'))) {
+		if (!user.rooms.has(Rooms.get('boardgames'))) {
 			return user.say("Your current hand: " + this.hands.get(player).split("").join(",") + " if you would like it to be formatted better, join <<scrabble>>");
 		}
 		player.say("Your hand: ");
@@ -234,7 +234,7 @@ class Scrabble extends Games.Game {
 			str += "<td style=background-color:#8b5a2b; height=\"15px\"; width=\"15px\"; align=\"center\"><b><font color=\"black\">" + tiles[i] + "</font></b></td>"
 		}
 		str += "</tr></table></body></html></div>";
-		Rooms.get("scrabble").say("/pminfobox " + player.id + ", " + str);
+		Rooms.get("boardgames").say("/pminfobox " + player.id + ", " + str);
 	}
 
     displayBoard() {

@@ -141,8 +141,8 @@ class MessageParser {
 			global.scrabauth = scrabauth;
 		case 'init':
 			room.onJoin(Users.self, ' ');
-			if (room.id === 'scrabble') {
-				room.say("/roomauth scrabble");
+			if (room.id === 'boardgames') {
+				room.say("/roomauth boardgames");
 			}
 			if (!global.awaitingscrab && room.id.startsWith('groupchat') && Config.commandCharacter === '.') return room.say("/deleteroom " + room.id);
 			console.log('Joined room: ' + room.id);
@@ -160,7 +160,7 @@ class MessageParser {
 			break;
 		case 'noinit':
 			console.log('Could not join room: ' + room.id);
-			if (room.id === 'scrabble') return;
+			if (room.id === 'boardgames') return;
 			Rooms.destroy(room);
 			break;
 		case 'deinit':
